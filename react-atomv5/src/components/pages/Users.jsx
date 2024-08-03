@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { SearchInput } from "../molecules/SearchInput";
 import { UserCard } from "../organisms/user/UserCard";
-import { useLocation } from "react-router-dom";
+import { SecondaryButton } from "../atoms/button/SecondaryButton";
 export const Users = () => {
-  const { state } = useLocation();
-  const isAdmin = state ? state.isAdmin :false;
   const users = [...Array(10).keys()].map(((val) => {
     return {
       id: val,
@@ -23,9 +21,11 @@ export const Users = () => {
     <SContainer>
       <h2>Usersページです</h2>
       <SearchInput />
+      <br />
+      <SecondaryButton>切り替え</SecondaryButton>
       <SUserArea>
         {users.map((user) => (
-        <UserCard key={user.id} user={user} isAdmin={isAdmin} />
+        <UserCard key={user.id} user={user} />
       ))}
       </SUserArea>
       
