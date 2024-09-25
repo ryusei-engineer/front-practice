@@ -3,25 +3,25 @@ import { Avatar } from '@mui/material';
 import React from 'react';
 import "./Post.css";
 
-const Post = () => {
+const Post = ({ displayName, username, verified, text, avatar, image }) => {
   return (
     <div className="post">
       <div className="post__avatar">
-        <Avatar />
+        <Avatar src={avatar}/>
       </div>
       <div className="post__body">
         <div className="post__header">
           <div className="post__headerText">
-            <h3>チュートリアル</h3>
+            <h3>{displayName}</h3>
             <span className="post__headerSpecial">
               <VerifiedUser className="post__badge"/>
-              @shin
+              @{username}
             </span>
           </div>
           <div className="post__headerDescription">
-            <p>reactなう</p>
+            <p>{text}</p>
           </div>
-          <img scr="https://source.unsplash.com/random" />
+          <img src={image} />
           <div className="post__footer">
             <ChatBubbleOutline fontSize='small'/>
             <Repeat fontSize='small'/>

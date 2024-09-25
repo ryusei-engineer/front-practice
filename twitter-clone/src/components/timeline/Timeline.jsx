@@ -12,7 +12,14 @@ const Timeline = () => {
 
       <TweetBox />
 
-      <Post />
+      <Post
+      displayName="プログラミングチュートリアル"
+      username="shin_engineer"
+      verified={true}
+      text="初めてのツイート"
+      avatar="http://shincode.info/wp-content/uploads/2021/12/icon.png"
+      image="http://shincode.info/wp-content/uploads/2021/12/icon.png"
+      />
     </div>
   )
 }
