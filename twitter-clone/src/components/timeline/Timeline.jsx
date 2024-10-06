@@ -31,7 +31,6 @@ const Timeline = () => {
 
       <TweetBox />
       {posts.map((post) => (
-        <FlipMove>
           <Post
           key={post.text}
           displayName={post.displayName}
@@ -41,8 +40,6 @@ const Timeline = () => {
           avatar={post.avatar}
           image={post.image}
           />
-        </FlipMove>
-        
       ))}
       
     </div>
