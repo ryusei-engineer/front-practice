@@ -1,23 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { getTasks, addTask, updateTask, deleteTask } from './api';
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('');
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    const response = await getTasks();
+    setTasks(response.data);
+  };
+
+  const handleAddTask = async () => {
+    await addTask({ title: newTask, completed: false });
+    setNewTask('');
+    fetchTasks();
+  };
+
+  const handleToggleComplete = async (id, completed) => {
+    await updateTask(id, { completed: !completed });
+    fetchTasks();
+  };
+
+  const handleDeleteTask = async (id) => {
+    await deleteTask(id);
+    fetchTasks();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>ToDo App</h1>
+      <input
+        value={newTask}
+        onChange={(e) => setNewTask(e.target.value)}
+        placeholder="Add a new task"
+      />
+      <button onClick={handleAddTask}>Add</button>
+      <ul>
+        {tasks.map(task => (
+          <li key={task.id}>
+            <span
+              onClick={() => handleToggleComplete(task.id, task.completed)}
+              style={{
+                textDecoration: task.completed ? 'line-through' : 'none'
+              }}
+            >
+              {task.title}
+            </span>
+            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
