@@ -9,5 +9,8 @@ let count = ref(0)
   <CountUp />
   <CountUp />
   <ShowCount :foo="count"/>
+  <RouterLink :to="{ name: 'about'}">about</RouterLink>
+  <RouterLink :to="{ name: 'home'}">home</RouterLink>
+  <RouterView></RouterView>
 </template>
 <style></style>
