@@ -1,47 +1,44 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import TodoList from './components/TodoList.vue';
+import { ref } from 'vue';
+
+const tasks = ref([]);
+const newTask = ref("");
+const addTask = () => {
+  tasks.value.push({
+    id: Date.now(),
+    text: newTask.value,
+  });
+  newTask.value = "";
+}
+
+const deleteTask = (id) => {
+  tasks.value = tasks.value.filter(task => task.id !== id);
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app">
+    <h1>Todo List</h1>
+    <input type="text" v-model="newTask" placeholder="新しいタスクを追加">
+    <button @click="addTask">追加</button>
+    <TodoList :tasks="tasks" @delete-task="deleteTask"/>
+    {{ tasks }}
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+#app {
+  text-align: center;
+  margin-top: 50px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+input {
+  margin-right: 10px;
+  padding: 5px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+button {
+  padding: 5px 10px;
 }
 </style>
