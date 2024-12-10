@@ -1,16 +1,8 @@
-<template>
-  <div>
-    <h1>記事一覧</h1>
-    <ArticleForm @add-article="addArticle" />
-    <ArticleList :articles="store.articles" @delete-article="deleteArticle" />
-  </div>
-</template>
-
 <script setup>
+import ArticleForm from '@/components/ArticleForm.vue';
+import ArticleList from '@/components/ArticleList.vue';
+import { useArticleStore } from '@/stores/articleStore';
 import { onMounted } from 'vue';
-import { useArticleStore } from '../stores/articleStore';
-import ArticleList from '../components/ArticleList.vue';
-import ArticleForm from '../components/ArticleForm.vue';
 
 const store = useArticleStore();
 
@@ -20,9 +12,20 @@ onMounted(() => {
 
 const addArticle = (article) => {
   store.addArticle(article);
-};
+}
 
 const deleteArticle = (id) => {
   store.deleteArticle(id);
-};
+}
+
+
 </script>
+
+<template>
+  記事一覧
+  <ArticleForm @add-article="addArticle"></ArticleForm>
+  <ArticleList :articles="store.articles" @delete-article="deleteArticle"></ArticleList>
+</template>
+
+<style scoped>
+</style>
