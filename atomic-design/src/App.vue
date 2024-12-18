@@ -2,7 +2,7 @@
 </script>
 
 <template>
-aaa
+  <router-view></router-view>
 </template>
 
 <style scoped>
