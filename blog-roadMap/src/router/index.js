@@ -7,22 +7,21 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: HomeView,
+    component: HomeView
   },{
     path: "/article/:id",
     name: "ArticleDetail",
-    component: ArticleDetailView,
-  },
-  {
+    component: ArticleDetailView
+  },{
     path: "/article/:id/edit",
     name: "ArticleEdit",
-    component: ArticleEditView,
+    component: ArticleEditView
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
-});
+  routes
+}) ;
 
 export default router;
