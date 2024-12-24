@@ -2,7 +2,7 @@
   <ul class="memo-list">
     <li v-for="memo in memoStore.memos" :key="memo.id">
       <span>{{ memo.text }}</span>
-      <button @click="memoStore.deleteMemo(memo.id)">Delete</button>
+      <Button @click="memoStore.deleteMemo(memo.id)" label="Delete"></Button>
     </li>
   </ul>
 </template>
@@ -10,7 +10,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useMemoStore } from '../../store/memoStore';
-
+import Button from '../atoms/Button.vue';
 const memoStore = useMemoStore();
 
 onMounted(() => {

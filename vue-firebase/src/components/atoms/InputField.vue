@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, defineEmits } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 defineProps({
   modelValue: String,
@@ -12,7 +12,6 @@ defineProps({
 });
 
 const emit = defineEmits(["update:modelValue"]);
-const value = ref('');
 </script>
 
 <style>

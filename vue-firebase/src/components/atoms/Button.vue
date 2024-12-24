@@ -1,5 +1,6 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <button @click="onClick" :class="'btn ' + type">{{ label }}</button>
+  <button @click="buttonClick" :class="'btn ' + type">{{ label }}</button>
 </template>
 
 <script setup>
@@ -10,6 +11,12 @@ defineProps({
   type: { type: String, default: 'primary' },
   onClick: Function,
 });
+
+const emit = defineEmits(["click"]);
+
+const buttonClick = () => {
+  emit("click");
+}
 </script>
 
 <style>
