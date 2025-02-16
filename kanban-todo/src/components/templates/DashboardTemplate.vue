@@ -1,11 +1,9 @@
 <script setup>
-
+import TaskForm from '../molecules/TaskForm.vue';
 </script>
 
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <TaskForm />
 </template>
 
 <style scoped>
