@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import InputField from '../atoms/InputField.vue'
-import Select from '../atoms/SelectAtom.vue'
 import ButtonAtom from '../atoms/ButtonAtom.vue'
-
-const task = ref('')
-const priority = ref('')
-const emergency = ref('')
+import SelectAtom from '../atoms/SelectAtom.vue'
+const task = ref('');
+const priorityValue = ref("");
+const emergencyValue = ref("");
+const addTask = () => {}
 
 const priorityOptions = [
   { value: '', label: '重要度' },
@@ -21,16 +21,13 @@ const emergencyOptions = [
   { value: 'medium', label: '中' },
   { value: 'low', label: '低' },
 ]
-
-const addTask = () => {}
 </script>
 
 <template>
   <InputField v-model="task" placeholder="タスクを入力" />
-  <Select v-model="priority" :options="priorityOptions" />
-  <Select v-model="emergency" :options="emergencyOptions" />
-  <ButtonAtom label="追加" @click="addTask" />
-  {{ task }}
+  <SelectAtom v-model="priorityValue" :options="priorityOptions" />
+  <SelectAtom v-model="emergencyValue" :options="emergencyOptions" />
+  <ButtonAtom @click="addTask" label="追加" />
 </template>
 
 <style scoped></style>
