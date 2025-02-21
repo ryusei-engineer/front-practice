@@ -7,20 +7,21 @@ import { onMounted } from 'vue';
 const taskStore = useTaskStore();
 onMounted(() => {
   taskStore.getTask();
+  taskStore.getTask2();
+  taskStore.getTask3();
 })
 const tasks = computed(() => taskStore.tasks || []);
-const tasks2 = [];
-const tasks3 = [];
-
+const tasks2 = computed(() => taskStore.tasks2 || []);
+const tasks3 = computed(() => taskStore.tasks3 || []);
 
 </script>
 
 <template>
   <TaskForm />
   <div class="task-columns">
-    <TaskColumn class="task-column" columnName="未着手" group="task-group" :list="tasks" />
-    <TaskColumn class="task-column" columnName="進行中" group="task-group" :list="tasks2"/>
-    <TaskColumn class="task-column" columnName="完了" group="task-group" :list="tasks3" />
+    <TaskColumn class="task-column" columnName="未着手" group="task-group" :list="tasks" tasksArray="tasks" />
+    <TaskColumn class="task-column" columnName="進行中" group="task-group" :list="tasks2" tasksArray="tasks2"/>
+    <TaskColumn class="task-column" columnName="完了" group="task-group" :list="tasks3" tasksArray="tasks3"/>
   </div>
 </template>
 
