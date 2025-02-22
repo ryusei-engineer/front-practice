@@ -65,10 +65,11 @@ const moveTask = (event) => {
       <template #item="{ element }">
         <CardAtom
           class="card-atom"
+          :columnName="columnName"
+          :taskId="element.id"
           :taskName="element.task"
-          :importance="element.emergencyValue"
-          :urgency="element.priorityValue"
-        />
+          :importance="element.priorityValue"
+          :urgency="element.emergencyValue"/>
       </template>
     </draggable>
   </div>

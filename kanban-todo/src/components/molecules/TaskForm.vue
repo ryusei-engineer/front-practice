@@ -17,16 +17,16 @@ const addTask = () => {
 
 const priorityOptions = [
   { value: '', label: '重要度' },
-  { value: 'high', label: '高' },
-  { value: 'medium', label: '中' },
-  { value: 'low', label: '低' },
+  { value: '高', label: '高' },
+  { value: '中', label: '中' },
+  { value: '低', label: '低' },
 ]
 
 const emergencyOptions = [
   { value: '', label: '緊急度' },
-  { value: 'high', label: '高' },
-  { value: 'medium', label: '中' },
-  { value: 'low', label: '低' },
+  { value: '高', label: '高' },
+  { value: '中', label: '中' },
+  { value: '低', label: '低' },
 ]
 </script>
 

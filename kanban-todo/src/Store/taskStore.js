@@ -72,11 +72,14 @@ export const useTaskStore = defineStore('tasks', {
     },
 
     async addTask(task, priorityValue, emergencyValue) {
-      await addDoc(collection(db, 'tasks'), {
+      if(task != "" && priorityValue != "" && emergencyValue != ""){
+        await addDoc(collection(db, 'tasks'), {
         task: task,
         priorityValue: priorityValue,
         emergencyValue: emergencyValue,
       })
+      }
+      
       //TODO:移動元のtask[]から削除するコードを書く
     },
 
@@ -86,13 +89,22 @@ export const useTaskStore = defineStore('tasks', {
         priorityValue: task.priorityValue,
         emergencyValue: task.emergencyValue,
       })
-      
     },
 
     async removeTask1(task, tasksArray) {
-      await deleteDoc(doc(db, tasksArray, task.id));
+      await deleteDoc(doc(db, tasksArray, task.id))
       //TODO:移動元のtask[]から削除するコードを書く
-    
+    },
+
+    async deleteTask1(taskId, columnName) {
+      if (columnName == '未着手') {
+        await deleteDoc(doc(db, "tasks", taskId))
+      } else if (columnName == '進行中') {
+        await deleteDoc(doc(db, "tasks2", taskId))
+      } else if (columnName == '完了') {
+        await deleteDoc(doc(db, "tasks3", taskId))
+      }
+
     },
   },
 })
