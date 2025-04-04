@@ -1,17 +1,11 @@
 <script setup>
-import { ref } from 'vue';
-import InputAtom from '../atoms/InputAtom.vue';
-import ButtonAtom from '../atoms/ButtonAtom.vue';
+import TaskForm from '../molecules/TaskForm.vue';
+import TaskList from '../molecules/TaskList.vue';
 
-const hoge = ref("");
-const hogeClick = () => {
-  hoge.value = "foo";
-}
 </script>
 <template>
-<InputAtom v-model="hoge"></InputAtom>
-<ButtonAtom label="ボタン" @click="hogeClick"></ButtonAtom>
-{{ hoge }}
+  <TaskForm></TaskForm>
+  <TaskList></TaskList>
 </template>
 
 <style scoped>

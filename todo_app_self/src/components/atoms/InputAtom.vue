@@ -1,7 +1,8 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue';
 defineProps({
-  modelValue: String
+  modelValue: String,
+  placeholder: String,
 });
 
 const emit = defineEmits(['update:modelValue'])
@@ -11,7 +12,7 @@ const inputValue = (e) => {
 }
 </script>
 <template>
-  <input :value="modelValue" @input="inputValue">
+  <input :value="modelValue" @input="inputValue" :placeholder="placeholder">
 
 </template>
 
