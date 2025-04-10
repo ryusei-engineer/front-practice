@@ -1,30 +1,45 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <h1>Todo App</h1>
+    <ul>
+      <div v-for="todo in todos" :key="todo.id">
+      <li>{{ todo.title }}</li>
+      <button @click="deleteTodoById(todo.id)">削除</button>
+      </div>
+      
+    </ul>
+    <input v-model="newTask" placeholder="新しいタスクを入力する" />
+    <button @click="addTodo">追加</button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup>
+import { ref, onMounted } from 'vue'
+  import { supabase } from './utils/supabase'
+
+const todos = ref([])
+const newTask = ref('')
+
+const fetchTodos = async () => {
+  const { data, error } = await supabase.from('todos').select('*').order('created_at', { ascending: false })
+  if (!error) {
+    todos.value = data
+  }
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+const addTodo = async () => {
+  if (newTask.value.trim() === '') return
+  const { error } = await supabase.from('todos').insert([{ title: newTask.value }])
+  if (!error) {
+    newTask.value = ''
+    fetchTodos()
+  }
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+const deleteTodoById = async (todoId) => {
+  await supabase.from("todos").delete().eq("id",todoId);
+  fetchTodos();
 }
-</style>
+
+onMounted(fetchTodos)
+</script>
